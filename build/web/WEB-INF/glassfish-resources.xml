@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resources PUBLIC "-//GlassFish.org//DTD GlassFish Application Server 3.1 Resource Definitions//EN" "http://glassfish.org/dtds/glassfish-resources_1_5.dtd">
+<resources>
+  <!-- AMQ Pool -->
+  <connector-connection-pool name="MQ_AMQ_Pool" resource-adapter-name="activemq-rar" 
+                             connection-definition-name="javax.jms.ConnectionFactory" 
+                             ping="true">
+  </connector-connection-pool>
+  <!-- AMQ Pool -->
+  <connector-resource pool-name="MQ_AMQ_Pool" 
+                      jndi-name="jms/MQFactory">
+  </connector-resource>
+  <!-- BACC Queues -->
+  <admin-object-resource res-adapter="activemq-rar" res-type="javax.jms.Queue" 
+                         enabled="true" jndi-name="queue/HSD.BACC.Retries.inbound" 
+                         class-name="org.apache.activemq.command.ActiveMQQueue">
+      <property name="PhysicalName" value="HSD.BACC.Retries.inbound"></property>
+      <property name="Name" value="HSD.BACC.Retries.inbound"></property>
+  </admin-object-resource>
+  <admin-object-resource res-adapter="activemq-rar" res-type="javax.jms.Queue" 
+                         enabled="true" jndi-name="topic/HSD.BACC.DHCPEvents" 
+                         class-name="org.apache.activemq.command.ActiveMQQueue">
+      <property name="PhysicalName" value="topic/HSD.BACC.DHCPEvents"></property>
+      <property name="Name" value="topic/HSD.BACC.DHCPEvents"></property>
+  </admin-object-resource>
+  <!-- Mail resource -->
+  <mail-resource host="mail.mygrande.com" 
+                 from="isys@corp.grandecom.com" user="isys" 
+                 jndi-name="mail/Exchange">
+  </mail-resource>
+</resources>
